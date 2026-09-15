@@ -1,9 +1,10 @@
 #fichier regorgeant les fonctions du jeu pendu
+
 import random
 import pickle
 import os
 from donnees import *
-
+scores={}
 def choisir_mots():
     mot=random.choice(mots_pendu)
     mot=str(mot)
@@ -47,14 +48,12 @@ def verificateur(mot):
             print(f"felicitations vous avez trouve le mot \
                   votre score est de {nb_chances}")
             break
-def recup_score():
-    if os.path.exists(nom_fichier_score): # Le fichier existe
-        fichier_score = open(nom_fichier_score, "rb")
-        mon_depickler = pickle.Unpickler(fichier_score)
-        scores = mon_depickler.load()
-        fichier_score.close()
-    else: # Le fichier n’existe pas
-        scores = {}
+def recup_score(user):
+    
+    if user in scores.keys():
+        score=scores[user]
+    else :
+        score[user]=0
     return scores
 
 def save_score():
